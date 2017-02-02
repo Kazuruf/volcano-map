@@ -51,6 +51,14 @@ for lat, lon, name, elev in zip(volcano_df["LAT"],
         )
     )
 
+map.add_child(folium.GeoJson(
+    data=open('world_population.json'),
+    name="World Population",
+    style_function=lambda x:
+    {'fillColor': 'green' if x['properties']['POP2005'] <= 10000000
+     else 'orange' if 10000000 < x['properties']['POP2005'] < 20000000
+     else 'red'}
+))
 
 # save and create map html file
 map.save("map1.html")
