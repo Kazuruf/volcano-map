@@ -9,6 +9,19 @@ map = folium.Map(location=[45.372, -121.679],
                  zoom_start=4,
                  tiles='Stamen Terrain')
 
+
+def color_marker(elev):
+    if elev in range(0, 1000):
+        color = 'green'
+    elif elev in range(1000, 2000):
+        color = 'orange'
+    elif elev in range(2000, 3000):
+        color = 'blue'
+    else:
+        color = 'red'
+    return color
+
+
 # iterate through the data frame and create markers based on the lat/long
 for lat, lon, name, elev in zip(volcano_df["LAT"],
                                 volcano_df["LON"],
@@ -22,9 +35,7 @@ for lat, lon, name, elev in zip(volcano_df["LAT"],
             [lat, lon],
             popup=name,
             icon=folium.Icon(
-                color='green' if elev in range(0, 1000)
-                else 'blue' if elev in range(1000, 3000)
-                else 'red'
+                color=color_marker(elev)
             )
         )
     )
