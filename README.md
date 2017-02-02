@@ -1,6 +1,6 @@
 # Volcano Web Map
 
-This app presents an interactive map of volcanoes with pins showing the locations of volcanoes. It uses geocoded location data.
+This app presents an interactive map of volcanoes with pins showing the locations of volcanoes. It uses geocoded location data and the folium and pandas python libraries to show geojson data.
 
 ### Installation
 
@@ -14,6 +14,8 @@ Run map1.py in terminal which will create an html file that you can open in your
 ```
 $ python map1.py
 ```
+
+If you have a different data source that you want to use, change the script to have pandas read the new file.  Variables will need to be adjusted to reflect the different column names.
 
 License
 -------
