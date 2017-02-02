@@ -32,6 +32,8 @@ def color_marker(elev):
     return color
 
 
+fg = folium.FeatureGroup(name="Volcano Locations")
+
 # iterate through the data frame and create markers based on the lat/long
 for lat, lon, name, elev in zip(volcano_df["LAT"],
                                 volcano_df["LON"],
@@ -41,7 +43,7 @@ for lat, lon, name, elev in zip(volcano_df["LAT"],
     # make conditionally colored markers based on elevation
     # uses inline if statements -> may not satisfy PEP8
     marker_label = name + str(elev) + "m"
-    map.add_child(
+    fg.add_child(
         folium.Marker(
             [lat, lon],
             popup=marker_label,
@@ -51,6 +53,7 @@ for lat, lon, name, elev in zip(volcano_df["LAT"],
         )
     )
 
+map.add_child(fg)
 map.add_child(folium.GeoJson(
     data=open('world_population.json'),
     name="World Population",
@@ -60,5 +63,6 @@ map.add_child(folium.GeoJson(
      else 'red'}
 ))
 
+map.add_child(folium.LayerControl())
 # save and create map html file
 map.save("map1.html")
